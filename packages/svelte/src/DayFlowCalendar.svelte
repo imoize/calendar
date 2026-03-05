@@ -89,18 +89,16 @@
 
     await tick();
 
-    renderer = new CalendarRenderer(app);
+    const activeOverrides = Object.keys(renderProps).filter(
+      (key) => renderProps[key] !== null,
+    );
+    renderer = new CalendarRenderer(app, activeOverrides);
     renderer.setProps(renderProps);
     renderer.mount(container);
 
     unsubscribe = renderer.getCustomRenderingStore().subscribe((renderings) => {
       customRenderings = [...renderings.values()];
     });
-
-    const activeOverrides = Object.keys(renderProps).filter(
-      (key) => renderProps[key] !== null,
-    );
-    renderer.getCustomRenderingStore().setOverrides(activeOverrides);
 
     mounted = true;
   });
@@ -126,6 +124,7 @@
       (key) => renderProps[key] !== null,
     );
     renderer.getCustomRenderingStore().setOverrides(activeOverrides);
+    app.setOverrides(activeOverrides);
   });
 
   function portal(node: HTMLElement, target: HTMLElement) {

@@ -122,7 +122,7 @@ export class DayFlowCalendarComponent
           collapsedSafeAreaLeft: this.collapsedSafeAreaLeft,
         });
       }
-      const contentSlotKeys = [
+      const slotKeys = [
         'eventContentDay',
         'eventContentWeek',
         'eventContentMonth',
@@ -131,11 +131,17 @@ export class DayFlowCalendarComponent
         'eventContentAllDayWeek',
         'eventContentAllDayMonth',
         'eventContentAllDayYear',
+        'eventDetailContent',
+        'eventDetailDialog',
+        'createCalendarDialog',
+        'titleBarSlot',
+        'colorPicker',
+        'createCalendarDialogColorPicker',
       ];
-      if (contentSlotKeys.some(key => changes[key])) {
-        this.renderer
-          .getCustomRenderingStore()
-          .setOverrides(this.getActiveOverrides());
+      if (slotKeys.some(key => changes[key])) {
+        const activeOverrides = this.getActiveOverrides();
+        this.renderer.getCustomRenderingStore().setOverrides(activeOverrides);
+        this.app.setOverrides(activeOverrides);
       }
     }
   }
@@ -149,7 +155,7 @@ export class DayFlowCalendarComponent
       return;
     }
 
-    this.renderer = new CalendarRenderer(this.app);
+    this.renderer = new CalendarRenderer(this.app, this.getActiveOverrides());
     this.renderer.setProps({
       collapsedSafeAreaLeft: this.collapsedSafeAreaLeft,
     });
@@ -161,10 +167,6 @@ export class DayFlowCalendarComponent
         this.customRenderings = [...renderings.values()];
         this.cdr.markForCheck();
       });
-
-    this.renderer
-      .getCustomRenderingStore()
-      .setOverrides(this.getActiveOverrides());
   }
 
   private getActiveOverrides(): string[] {

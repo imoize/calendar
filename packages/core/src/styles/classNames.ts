@@ -278,7 +278,7 @@ export const monthAllDayContent =
  * MonthView regular event content
  */
 export const monthRegularContent =
-  'text-xs cursor-pointer flex items-center justify-between';
+  'text-xs cursor-pointer flex items-center justify-between px-0.5';
 
 /**
  * Event title (small)
