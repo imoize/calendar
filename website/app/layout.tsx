@@ -1,4 +1,5 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
+import type { Metadata } from 'next';
 
 import './global.css';
 import { Inter } from 'next/font/google';
@@ -6,6 +7,42 @@ import { Inter } from 'next/font/google';
 const inter = Inter({
   subsets: ['latin'],
 });
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | DayFlow',
+    default: 'DayFlow - Lightweight Calendar Component',
+  },
+  description:
+    'A lightweight and elegant full calendar component for React, Vue, Angular, and Svelte. Supports day, week, month, and year views with drag-and-drop, localization, and dark mode.',
+  openGraph: {
+    type: 'website',
+    siteName: 'DayFlow',
+    title: {
+      template: '%s | DayFlow',
+      default: 'DayFlow - Lightweight Calendar Component',
+    },
+    description:
+      'A lightweight and elegant full calendar component for React, Vue, Angular, and Svelte.',
+    images: [
+      {
+        url: '/logo.png',
+        width: 512,
+        height: 512,
+        alt: 'DayFlow Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: {
+      template: '%s | DayFlow',
+      default: 'DayFlow - Lightweight Calendar Component',
+    },
+    description:
+      'A lightweight and elegant full calendar component for React, Vue, Angular, and Svelte.',
+  },
+};
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
